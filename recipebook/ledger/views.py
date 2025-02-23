@@ -48,7 +48,7 @@ def recipeList(request):
                         },
                     {
                         "name": "water",
-                        "quanity": "1 cup"
+                        "quantity": "1 cup"
                         },
                     {
                         "name": "salt",
@@ -70,7 +70,67 @@ def recipeList(request):
     return render(request, "recipeList.html", ctx)
 
 def recipe1(request):
-    return HttpResponse("This is where the Recipe1.html should be")
+    ctx = {
+        "name": "Recipe 1",
+        "ingredients":[
+            {
+                "name": "tomato",
+                "quantity": "3pcs"
+                },
+            {
+                "name": "onion",
+                "quantity": "1pc"
+                },
+            {
+                "name": "pork",
+                "quantity": "1kg"
+                },
+            {
+                "name": "water",
+                "quantity": "1L"
+                },
+            {
+                "name": "sinigang mix",
+                "quantity": "1 packet"
+                }
+            ],
+        "link": "/recipe/1"
+        }
+    return render(request, "recipeEntry.html", ctx)
 
 def recipe2(request):
-    return HttpResponse("This is where the Recipe2.html should be")
+    ctx = {
+        "name": "Recipe 2",
+        "ingredients":[
+            {
+                "name": "garlic",
+                "quantity": "1 head"
+                },
+            {
+                "name": "onion",
+                "quantity": "1pc"
+                },
+            {
+                "name": "vinegar",
+                "quantity": "1/2cup"
+                },
+            {
+                "name": "water",
+                "quantity": "1 cup"
+                },
+            {
+                "name": "salt",
+                "quantity": "1 tablespoon"
+                },
+            {
+                "name": "whole black peppers",
+                "quantity": "1 tablespoon"
+                },
+            {
+                "name": "pork",
+                "quantity": "1 kilo"
+                },
+            ],
+        "link": "/recipe/2"
+        }
+    return render(request, "recipeEntry.html", ctx)
