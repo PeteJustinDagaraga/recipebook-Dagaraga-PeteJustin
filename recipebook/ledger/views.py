@@ -75,5 +75,5 @@ def recipeEntry(request,num=-1):
     if num in range(1,3):
         ctx = fullcontext["recipes"][num-1]
     else:
-        return HttpResponse(404)
+        return HttpResponse(loader.get_template("404.html").render())
     return render(request, "recipeEntry.html", ctx)
