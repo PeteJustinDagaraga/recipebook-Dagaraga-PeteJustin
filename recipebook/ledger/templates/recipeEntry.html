@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang = "en-US">
+
+<head>
+	<title>{{name}}</title>
+</head>
+
+<body>
+	<div id="content">
+		<h1>Recipe Book</h1>
+			<ul>
+				<h3>Entry: <b>{{ name }}</b></h3>
+				Ingredients Required:
+				<ul>
+				{% for ingredient in ingredients %}
+					<li>
+						{{ ingredient.quantity }} {{ ingredient.name }}
+					</li>
+				{% endfor %}
+				</ul>
+			</ul>
+	</div>
+</body>
+</html>
