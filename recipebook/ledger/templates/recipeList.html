@@ -8,19 +8,16 @@
 <body>
 	<div id="content">
 		<h1>Recipe Book</h1>
-
+		<ul>
+		<p>Available Recipes:</p>
+		<ul>
 		{% for recipe in recipes %}
-			<ul>
-				Entry: <a href="{{ recipe.link }}"><b>{{ recipe.name }}</b></a>
-				<ul>
-				{% for ingredient in recipe.ingredients %}
-					<li>
-						{{ ingredient.quantity }} {{ ingredient.name }}
-					</li>
-				{% endfor %}
-				</ul>
-			</ul>
+			<li>
+				<a href="{{ recipe.link }}"><b>{{ recipe.name }}</b></a>
+			</li>
 		{% endfor %}
+		</ul>
+		</ul>
 	</div>
 
 </body>
