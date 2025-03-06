@@ -2,19 +2,21 @@
 <html lang = "en-US">
 
 <head>
-	<title>{{name}}</title>
+	<title>
+		{{recipeingredients.0.recipe.name}}
+	</title>
 </head>
 
 <body>
 	<div id="content">
 		<h1>Recipe Book</h1>
 			<ul>
-				<h3>Entry: <b>{{ name }}</b></h3>
+				<h3>Entry: <b>{{ recipeingredients.0.recipe.name }}</b></h3>
 				Ingredients Required:
 				<ul>
-				{% for ingredient in ingredients %}
+				{% for item in recipeingredients %}
 					<li>
-						{{ ingredient.quantity }} {{ ingredient.name }}
+						{{ item.quantity }} {{ item.ingredient.name }}
 					</li>
 				{% endfor %}
 				</ul>
