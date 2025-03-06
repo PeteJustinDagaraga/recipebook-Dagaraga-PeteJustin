@@ -1,24 +1,27 @@
 <!DOCTYPE html>
 <html lang = "en-US">
-
+{% with recipeentry=recipeingredients.0.recipe.name %}
 <head>
-	<title>{{name}}</title>
+	<title>
+		{{ recipeentry }}
+	</title>
 </head>
 
 <body>
 	<div id="content">
 		<h1>Recipe Book</h1>
+		<ul>
+			<h3>Entry: <b>{{ recipeentry }}</b></h3>
+			Ingredients Required:
 			<ul>
-				<h3>Entry: <b>{{ name }}</b></h3>
-				Ingredients Required:
-				<ul>
-				{% for ingredient in ingredients %}
-					<li>
-						{{ ingredient.quantity }} {{ ingredient.name }}
-					</li>
-				{% endfor %}
-				</ul>
+			{% for item in recipeingredients %}
+				<li>
+					{{ item.quantity }} {{ item.ingredient.name }}
+				</li>
+			{% endfor %}
 			</ul>
+		</ul>
 	</div>
 </body>
+{% endwith %}
 </html>
