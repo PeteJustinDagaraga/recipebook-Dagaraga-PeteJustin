@@ -31,7 +31,14 @@ class Recipe(models.Model):
         verbose_name = 'recipe'
         verbose_name_plural = 'recipes'
 
+
 class RecipeIngredient(models.Model):
     quantity = models.CharField(max_length=50)
     ingredient = models.ForeignKey(Ingredient, on_delete = models.CASCADE, related_name = 'recipe')
     recipe = models.ForeignKey(Recipe, on_delete = models.CASCADE, related_name = 'ingredient')
+
+
+class Profile(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    name = models.CharField(max_length=50)
+    bio = models.CharField(max_length=255)
