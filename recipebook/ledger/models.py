@@ -26,9 +26,9 @@ class Profile(models.Model):
 
 class Recipe(models.Model):
     name = models.CharField(max_length=50)
-    author = models.ForeignKey(Profile, on_delete = models.CASCADE, related_name = 'author')
-    created_on = models.DateTimeField(auto_now_add=True)
-    updated_on = models.DateTimeField(auto_now=True)
+    author = models.ForeignKey(Profile, on_delete = models.CASCADE, related_name = 'author', null=True)
+    created_on = models.DateTimeField(auto_now_add=True, null=True)
+    updated_on = models.DateTimeField(auto_now=True, null=True)
     
     def get_absolute_url(self):
         return reverse("ledger:recipeEntry",kwargs={"num":int(self.name[7:])})
