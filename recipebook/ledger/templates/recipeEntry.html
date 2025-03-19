@@ -12,6 +12,9 @@
 		<h1>Recipe Book</h1>
 		<ul>
 			<h3>Entry: <b>{{ recipeentry }}</b></h3>
+			{% with recipeauthor=recipeingredients.0.recipe.author%}
+				Author: {{recipeauthor}}
+			{% endwith %}
 			Ingredients Required:
 			<ul>
 			{% for item in recipeingredients %}
