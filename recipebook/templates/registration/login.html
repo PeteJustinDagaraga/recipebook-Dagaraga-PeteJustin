@@ -1,9 +1,15 @@
-<html>
-	<body>
-		<form method="POST">
-			{% csrf_token %}
-			{{ form.as_p }}
-			<button type="submit">Login</button>
-		</form>
-	</body>
-</html>
+{% extends 'base.html' %}
+{% block title %}Login{% endblock %}
+{% block locator %}
+	<p style="padding-top: 0.05rem; margin-bottom: -0.05rem; color: #7FBFA0;"> Now at: Login</p>
+{% endblock %}
+{% block content %}
+	<div style="margin: auto;width: 40%;text-align: center;padding: 55px;">
+		<h1>LOGIN HERE</h1>
+			<form method="POST">
+				{% csrf_token %}
+				{{ form.as_p }}
+				<button type="submit">Login</button>
+			</form>
+	</div>
+{% endblock %}

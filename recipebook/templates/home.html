@@ -1,10 +1,17 @@
-{% extends 'base_navbar.html' %}
+{% extends 'base.html' %}
 {% block title %}Home{% endblock %}
+{% block locator %}
+	<p style="padding-top: 0.05rem; margin-bottom: -0.05rem; color: #54BAAB"> Now at: Home</p>
+{% endblock %}
 {% block content %}
-	<h1>Welcome Home!</h1>
-	{% if user.is_authenticated %}
-		<p>Feel free to explore the rest of this website, {{user.profile.name}}</p>
-	{% else %}
-		<p>Make sure to login to gain access to the rest of this website</p>
-	{% endif %}
+	<div style="margin: auto;width: 60%;text-align: center;padding: 55px;">
+		<h1>Welcome Home!</h1>
+		{% if user.is_authenticated %}
+			<p>Feel free to explore the rest of this website, {{user.profile.name}}</p>
+			<h4>Available Pages:</h4>
+			<a href="{% url 'ledger:recipeList' %}">Recipe List</a>
+		{% else %}
+			<p>Make sure to login to gain access to the rest of this website</p>
+		{% endif %}
+	</div>
 {% endblock %}
