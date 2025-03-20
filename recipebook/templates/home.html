@@ -2,5 +2,9 @@
 {% block title %}Home{% endblock %}
 {% block content %}
 	<h1>Welcome Home!</h1>
-	<p>Make sure to login to gain access to the rest of this website</p>
+	{% if user.is_authenticated %}
+		<p>Feel free to explore the rest of this website, {{user.profile.name}}</p>
+	{% else %}
+		<p>Make sure to login to gain access to the rest of this website</p>
+	{% endif %}
 {% endblock %}
