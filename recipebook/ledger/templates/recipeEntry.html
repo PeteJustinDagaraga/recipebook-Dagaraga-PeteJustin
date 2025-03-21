@@ -1,27 +1,27 @@
-<!DOCTYPE html>
-<html lang = "en-US">
-{% with recipeentry=recipeingredients.0.recipe.name %}
-<head>
-	<title>
-		{{ recipeentry }}
-	</title>
-</head>
-
-<body>
-	<div id="content">
-		<h1>Recipe Book</h1>
+{% extends 'base.html' %}
+{% block title %}
+	{{ recipe.name }}
+{% endblock %}
+{% block locator %}
+	<p style="padding-top: 0.05rem; margin-bottom: -0.05rem; color: #BC7C33"> Now at: {{ recipe.name }}</p>
+{% endblock %}
+{% block content %}
+	<div style="margin: auto; width: 85%; text-align: center; padding: 30px;">
 		<ul>
-			<h3>Entry: <b>{{ recipeentry }}</b></h3>
+			<h3>Entry: <b>{{ recipe.name }}</b></h3>
+			Author: {{ recipe.author }}
+			<br>
 			Ingredients Required:
-			<ul>
-			{% for item in recipeingredients %}
-				<li>
-					{{ item.quantity }} {{ item.ingredient.name }}
-				</li>
-			{% endfor %}
-			</ul>
+			<div style="margin: auto; width: 50%;">
+				<ul style="text-align: left; padding: 15px; padding-left: 35%;">
+					{% for item in recipeingredients %}
+						<li style="margin: auto">
+							{{ item.quantity }} {{ item.ingredient.name }}
+						</li>
+					{% endfor %}
+				</ul>
+			</div>
+			<a href="{% url 'ledger:recipeList' %}">Return To List</a>
 		</ul>
 	</div>
-</body>
-{% endwith %}
-</html>
+{% endblock %}

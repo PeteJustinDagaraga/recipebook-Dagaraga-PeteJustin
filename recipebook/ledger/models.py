@@ -1,5 +1,6 @@
 from django.db import models
 from django.urls import reverse
+from django.contrib.auth.models import User    
 
 class Ingredient(models.Model):
     name = models.CharField(max_length=50)
@@ -16,8 +17,21 @@ class Ingredient(models.Model):
         verbose_name = 'ingredient'
         verbose_name_plural = 'ingredients'
 
+
+class Profile(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    name = models.CharField(max_length=50)
+    bio = models.CharField(max_length=255)
+
+    def __str__(self):
+        return self.name
+
+
 class Recipe(models.Model):
     name = models.CharField(max_length=50)
+    author = models.ForeignKey(Profile, on_delete = models.CASCADE, related_name = 'author', null=True)
+    created_on = models.DateTimeField(auto_now_add=True, null=True)
+    updated_on = models.DateTimeField(auto_now=True, null=True)
     
     def get_absolute_url(self):
         return reverse("ledger:recipeEntry",kwargs={"num":int(self.name[7:])})
@@ -30,6 +44,7 @@ class Recipe(models.Model):
         unique_together = ['name']
         verbose_name = 'recipe'
         verbose_name_plural = 'recipes'
+
 
 class RecipeIngredient(models.Model):
     quantity = models.CharField(max_length=50)
