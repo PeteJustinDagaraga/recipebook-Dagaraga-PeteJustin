@@ -1,5 +1,4 @@
-from django.shortcuts import render
-from django.http import HttpResponse
+from django.shortcuts import render, get_object_or_404, get_list_or_404
 from django.template import loader
 from .models import Recipe, RecipeIngredient
 from django.contrib.auth.decorators import login_required
@@ -11,8 +10,9 @@ def recipeList(request):
 
 @login_required
 def recipeEntry(request,num=-1):
-    if num in range(1,3):
-        recipeingredients = RecipeIngredient.objects.filter(recipe__name="Recipe "+str(num))
-    else:
-        return HttpResponse(loader.get_template("404.html").render())
-    return render(request, "recipeEntry.html", {'recipeingredients':recipeingredients})
+    input_recipe_name = "Recipe "+str(num)
+    involved_recipe = get_object_or_404(Recipe, name=input_recipe_name)
+    recipeingredients = RecipeIngredient.objects.filter(recipe=involved_recipe)
+    print(recipeingredients)
+    
+    return render(request, "recipeEntry.html", {'recipeingredients':recipeingredients, 'recipe': involved_recipe})

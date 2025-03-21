@@ -1,35 +1,27 @@
 {% extends 'base.html' %}
 {% block title %}
-	{% with recipeentry=recipeingredients.0.recipe.name %}
-		{{ recipeentry }}
-	{% endwith %}
+	{{ recipe.name }}
 {% endblock %}
 {% block locator %}
-	{% with recipeentry=recipeingredients.0.recipe.name %}
-		<p style="padding-top: 0.05rem; margin-bottom: -0.05rem; color: #BC7C33"> Now at: {{recipeentry}}</p>
-	{% endwith %}
+	<p style="padding-top: 0.05rem; margin-bottom: -0.05rem; color: #BC7C33"> Now at: {{ recipe.name }}</p>
 {% endblock %}
 {% block content %}
-	{% with recipeentry=recipeingredients.0.recipe.name %}
-		<div style="margin: auto; width: 85%; text-align: center; padding: 30px;">
-			<ul>
-				<h3>Entry: <b>{{ recipeentry }}</b></h3>
-				{% with recipeauthor=recipeingredients.0.recipe.author%}
-					Author: {{recipeauthor}}
-				{% endwith %}
-				<br>
-				Ingredients Required:
-				<div style="margin: auto; width: 50%;">
-					<ul style="text-align: left; padding: 15px; padding-left: 35%;">
+	<div style="margin: auto; width: 85%; text-align: center; padding: 30px;">
+		<ul>
+			<h3>Entry: <b>{{ recipe.name }}</b></h3>
+			Author: {{ recipe.author }}
+			<br>
+			Ingredients Required:
+			<div style="margin: auto; width: 50%;">
+				<ul style="text-align: left; padding: 15px; padding-left: 35%;">
 					{% for item in recipeingredients %}
 						<li style="margin: auto">
 							{{ item.quantity }} {{ item.ingredient.name }}
 						</li>
 					{% endfor %}
-					</ul>
-				</div>
-				<a href="{% url 'ledger:recipeList' %}">Return To List</a>
-			</ul>
-		</div>
-	{% endwith %}
+				</ul>
+			</div>
+			<a href="{% url 'ledger:recipeList' %}">Return To List</a>
+		</ul>
+	</div>
 {% endblock %}
