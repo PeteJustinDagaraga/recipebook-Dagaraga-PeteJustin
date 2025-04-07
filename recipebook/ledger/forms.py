@@ -22,4 +22,4 @@ class RecipeIngredientForm(forms.ModelForm):
 class RecipeImageForm(forms.ModelForm):
     class Meta:
         model = RecipeImage
-        exclude = ['recipe']
+        fields = '__all__'

@@ -20,7 +20,7 @@ class Ingredient(models.Model):
 
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    name = models.CharField(max_length=50)
+    name = models.CharField(max_length=50, default=user.name)
     bio = models.CharField(max_length=255)
 
     def __str__(self):
@@ -34,7 +34,7 @@ class Recipe(models.Model):
     updated_on = models.DateTimeField(auto_now=True, null=True)
     
     def get_absolute_url(self):
-        return reverse("ledger:recipeEntry",kwargs={"num":int(self.name[7:])})
+        return reverse("ledger:recipeEntry",kwargs={"num": self.id})
 
     def __str__(self):
         return '{}'.format(self.name)

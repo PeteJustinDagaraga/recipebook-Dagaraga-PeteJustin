@@ -25,6 +25,10 @@
 					{% endfor %}
 				</ul>
 			</div>
+			{% if user.profile.name == recipe.author.name %}
+				<a href="{% url 'ledger:recipeImageAdder' num=id %}">Add Images to Entry</a>
+				<br>
+			{% endif %}
 			<a href="{% url 'ledger:recipeList' %}">Return To List</a>
 		</ul>
 	</div>

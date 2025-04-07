@@ -11,13 +11,11 @@ def recipeList(request):
 
 @login_required
 def recipeEntry(request,num=-1):
-    input_recipe_name = "Recipe "+str(num)
-    involved_recipe = get_object_or_404(Recipe, name=input_recipe_name)
+    involved_recipe = get_object_or_404(Recipe, pk=num)
     involved_images = RecipeImage.objects.filter(recipe=involved_recipe)
     recipeingredients = RecipeIngredient.objects.filter(recipe=involved_recipe)
-    print(recipeingredients)
     
-    return render(request, "recipeEntry.html", {'recipeingredients':recipeingredients, 'recipe': involved_recipe, 'recipeimage': involved_images})
+    return render(request, "recipeEntry.html", {'recipeingredients':recipeingredients, 'recipe': involved_recipe, 'recipeimage': involved_images, 'id': num})
 
 @login_required
 def recipeAdd(request):
@@ -27,9 +25,7 @@ def recipeAdd(request):
 
         if form_type=="recipe":
             form = RecipeForm(request.POST).save(commit=False)
-            print(request.POST.get('author'))
             form.author = get_object_or_404(Profile, name=request.POST.get('author'))
-            print(form.author.bio)
             form.save()
 
         elif form_type=="ingredient":
@@ -51,3 +47,19 @@ def recipeAdd(request):
     recipeingredient_form = RecipeIngredientForm()
 
     return render(request, "recipeAdd.html", {'recipe_form': recipe_form, 'ingredient_form': ingredient_form, 'recipeingredient_form': recipeingredient_form})
+
+@login_required
+def recipeImageAdder(request,num=-1):
+    involved_recipe = get_object_or_404(Recipe, pk=num)
+
+    if request.method=="POST":
+
+        form = RecipeImageForm(request.POST, request.FILES).save(commit=False)
+        if form.recipe == involved_recipe and form.recipe.author == get_object_or_404(Profile, name=request.POST.get('author')):
+            form.save()
+            
+        return redirect("ledger:recipeEntry", num=num)
+
+    recipeimage_form = RecipeImageForm()
+
+    return render(request, "recipeImageAdder.html", {'recipeimage_form': recipeimage_form, 'recipe': involved_recipe})
