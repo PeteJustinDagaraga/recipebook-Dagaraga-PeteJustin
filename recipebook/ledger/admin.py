@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Ingredient, Recipe, RecipeIngredient, Profile
+from .models import Ingredient, Recipe, RecipeIngredient, Profile, RecipeImage
 from django.contrib.auth.models import User
 
 class IngredientAdmin(admin.ModelAdmin):
@@ -10,11 +10,6 @@ class IngredientAdmin(admin.ModelAdmin):
     list_display_links = None
     list_editable = ('name',)
 
-class RecipeAdmin(admin.ModelAdmin):
-    model = Recipe
-
-    list_display = ('name','author__name',)
-    list_filter = ('name',)
 
 class RecipeIngredientAdmin(admin.ModelAdmin):
     model = RecipeIngredient
@@ -31,8 +26,22 @@ class ProfileInline(admin.StackedInline):
     can_delete = False
 
 
+class RecipeImageInline(admin.StackedInline):
+    model = RecipeImage
+    can_delete = False
+
+
+class RecipeAdmin(admin.ModelAdmin):
+    model = Recipe
+    inlines = [RecipeImageInline]
+
+    list_display = ('name','author__name',)
+    list_filter = ('name',)
+
+
 class UserAdmin(admin.ModelAdmin):
     inlines = [ProfileInline]
+
 
 admin.site.register(Ingredient, IngredientAdmin)
 admin.site.register(Recipe, RecipeAdmin)
