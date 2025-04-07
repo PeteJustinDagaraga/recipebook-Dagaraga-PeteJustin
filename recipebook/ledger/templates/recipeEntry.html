@@ -10,6 +10,10 @@
 		<ul>
 			<h3>Entry: <b>{{ recipe.name }}</b></h3>
 			Author: {{ recipe.author }}
+			{% for picture in recipeimage %}
+				<br>
+				<img src="{{picture.image.url}}" alt="{{ picture.description }}"></img>
+			{% endfor %}
 			<br>
 			Ingredients Required:
 			<div style="margin: auto; width: 50%;">

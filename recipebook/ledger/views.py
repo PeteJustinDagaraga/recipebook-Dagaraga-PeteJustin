@@ -1,6 +1,6 @@
 from django.shortcuts import render, get_object_or_404, get_list_or_404
 from django.template import loader
-from .models import Recipe, RecipeIngredient
+from .models import Recipe, RecipeIngredient, RecipeImage
 from django.contrib.auth.decorators import login_required
 
 @login_required
@@ -12,7 +12,8 @@ def recipeList(request):
 def recipeEntry(request,num=-1):
     input_recipe_name = "Recipe "+str(num)
     involved_recipe = get_object_or_404(Recipe, name=input_recipe_name)
+    involved_images = get_list_or_404(RecipeImage, recipe=involved_recipe)
     recipeingredients = RecipeIngredient.objects.filter(recipe=involved_recipe)
     print(recipeingredients)
     
-    return render(request, "recipeEntry.html", {'recipeingredients':recipeingredients, 'recipe': involved_recipe})
+    return render(request, "recipeEntry.html", {'recipeingredients':recipeingredients, 'recipe': involved_recipe, 'recipeimage': involved_images})
