@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% block title %}Add{% endblock %}
+{% block locator %}
+	<p style="padding-top: 0.05rem; margin-bottom: -0.05rem; color: #8C2CAB"> Now at: Add</p>
+{% endblock %}
+{% block content %}
+	<div style="margin: auto;width: 60%;text-align: center;padding: 30px;">
+		<h4>RECIPE</h4>
+		<form method="post">
+			{% csrf_token %}
+			{{ recipe_form.as_p }}
+			<input type="hidden" id="author" name="author" value="{{user.profile.name}}" />
+			<button type="submit" name="form_type" value="recipe">Submit Recipe</button>
+		</form>
+		<br>
+		<h4>INGREDIENT</h4>
+		<form method="post">
+			{% csrf_token %}
+			{{ ingredient_form.as_p }}
+			<button type="submit" name="form_type" value="ingredient">Submit Ingredient</button>
+		</form>
+		<br>
+		<h4>RECIPE INGREDIENT</h4>
+		<p>(Notice: If you aren't the owner of the recipe, then setting your ingredients to it will not work)</p>
+		<form method="post">
+			{% csrf_token %}
+			{{ recipeingredient_form.as_p }}
+			<input type="hidden" id="author" name="author" value="{{user.profile.name}}" />
+			<button type="submit" name="form_type" value="recipeingredient">Set Ingredient To Recipe</button>
+		</form>
+	</div>
+{% endblock %}

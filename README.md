@@ -5,3 +5,5 @@
 > Instead of hard-coding context file, makes use of models and databases written into it via admin page instead.
 # branch lab3
 > User Management Update!
+# branch lab4
+> You can now add recipes without admin, but with forms (if you are logged in)

@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% block title %}
+	{% if user.profile.name != recipe.author.name %}
+		Not for your eyes...
+	{% else %}
+		Add Image to {{ recipe.name }}
+	{% endif %}
+{% endblock %}
+{% block locator %}
+	{% if user.profile.name != recipe.author.name %}
+		Not for your eyes...
+	{% else %}
+		<p style="padding-top: 0.05rem; margin-bottom: -0.05rem; color: #54BAAB"> Now at: Add Image to {{ recipe.name }}</p>
+	{% endif %}
+{% endblock %}
+{% block content %}
+	<div style="margin: auto;width: 60%;text-align: center;padding: 30px;">
+		{% if user.profile.name != recipe.author.name %}
+			<h3>You aren't supposed to be here...</h3>
+			<a href="{% url 'ledger:recipeList' %}">Return to Recipe List</a>
+		{% else %}
+			<h3>Your changes will not apply if Recipe is not selected according to the Recipe that was chosen.</h3>
+			<form method="post" enctype="multipart/form-data">
+				{% csrf_token %}
+				{{ recipeimage_form.as_p }}
+				<input type="hidden" id="author" name="author" value="{{user.profile.name}}" />
+				<button type="submit">Submit Image</button>
+			</form>
+		{% endif %}
+	</div>
+{% endblock %}
